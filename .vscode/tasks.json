@@ -1,0 +1,43 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+      {
+          "label": "build-ASMwithCPP",
+          "command": "nasm",
+          "args": [
+              "-f",
+              "elf64",
+              "-o",
+              "${fileDirname}/${fileBasenameNoExtension}.o",
+              "${file}"
+          ]
+      },
+      {
+          "label": "LINK",
+          "command": "ld",
+          "args": [
+              "${fileDirname}/${fileBasenameNoExtension}.o",
+              "-o",
+              "${fileDirname}/${fileBasenameNoExtension}"
+          ],
+          "dependsOn": [
+              "build-ASMwithCPP"
+          ],
+          "group": {
+              "kind": "build",
+              "isDefault": true
+          },
+          "problemMatcher": {
+              "pattern": {
+                  "regexp": "error"
+              }
+          },
+          "presentation": {
+              "focus": true,
+              "panel": "dedicated",
+              "reveal": "silent",
+              "clear": true
+          }
+      }
+  ]
+}
